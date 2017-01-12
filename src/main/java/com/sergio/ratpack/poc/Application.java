@@ -1,9 +1,12 @@
 package com.sergio.ratpack.poc;
 
 import com.sergio.ratpack.poc.auth.AuthenticationHandler;
+import com.sergio.ratpack.poc.domain.VisaRequestDTO;
 import com.sergio.ratpack.poc.handlers.PingHandler;
 import com.sergio.ratpack.poc.handlers.visa.VisaActions;
+import ratpack.exec.Promise;
 import ratpack.guice.Guice;
+import ratpack.jackson.Jackson;
 import ratpack.rx.RxRatpack;
 import ratpack.server.RatpackServer;
 
