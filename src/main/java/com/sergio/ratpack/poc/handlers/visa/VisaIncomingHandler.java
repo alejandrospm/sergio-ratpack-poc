@@ -36,8 +36,8 @@ public class VisaIncomingHandler implements Handler {
 						.map(this::buildCreditCardNormalizedIncomingRequestDTOObject);
 
 		Blocking.get(() -> {
-//			RabbitMqSenderHandler.sendMessageToQueue(promise.toString());
-			Thread.sleep(100);
+			RabbitMqSenderHandler.sendMessageToQueue(promise.toString());
+//			Thread.sleep(100);
 			context.getResponse().status(200);
 			return "Request processed";
 		})

@@ -1,16 +1,12 @@
 package com.sergio.ratpack.poc.modules;
 
 import com.buzzpoints.rqt.common.model.paymentmethod.dto.CreditCardNormalizedIncomingRequestDTO;
-import com.google.inject.AbstractModule;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.sergio.ratpack.poc.domain.VisaRequestDTO;
+import com.rabbitmq.client.MessageProperties;
 import lombok.extern.slf4j.Slf4j;
 import ratpack.func.Action;
-import ratpack.handling.Chain;
-import ratpack.handling.Context;
-import ratpack.handling.Handler;
 
 import java.io.IOException;
 
@@ -27,7 +23,7 @@ public class RabbitMqSenderHandler implements Action<CreditCardNormalizedIncomin
 		factory.setHost("localhost");
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
-		channel.basicPublish("visa.exchange.test", "visa.routing.test", null, visaRequestDTO.toString().getBytes());
+		channel.basicPublish("visa.exchange.test", "visa.routing.test", MessageProperties.PERSISTENT_TEXT_PLAIN, visaRequestDTO.toString().getBytes());
 		log.info("!!!! Message put in the queue !!!!");
 		channel.close();
 		connection.close();
